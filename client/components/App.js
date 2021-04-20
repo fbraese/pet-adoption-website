@@ -16,8 +16,11 @@ const App = props => {
     <div className="callout primary">
       <BrowserRouter>
         <Switch>
-          {/* add redirect from "/" to "/pets" */} 
-          <Route path="/pets" component={PetTypesList} />
+          <Route exact path="/">
+            <Redirect to="/pets" />
+          </Route>
+          {/* add redirect from "/" to "/pets" */}
+          <Route exact path="/pets" component={PetTypesList} />
         </Switch>
       </BrowserRouter>
     </div>

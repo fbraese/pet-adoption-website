@@ -5,9 +5,10 @@ const pool = new pg.Pool({
 })
 
 class PetType {
-  constructor({id, description, img_url, imgUrl}){
+  constructor({ id, description, type, img_url, imgUrl }) {
     this.id = id
     this.description = description
+    this.type = type
     this.imgUrl = imgUrl || img_url
   }
 
@@ -19,7 +20,7 @@ class PetType {
       return petTypes
     } catch (error) {
       console.error("Error from PetType.findall()", error)
-      throw(error)
+      throw (error)
     }
   }
 }

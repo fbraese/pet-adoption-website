@@ -1,12 +1,8 @@
-import React, {useState, useEffect} from "react"
+import React, { useState, useEffect } from "react"
+import PetTypeTile from "./PetTypeTile"
 
 const PetTypesList = (props) => {
-  const [petTypes, setPetTypes] = useState({
-    id: "",
-    imgUrl: "",
-    description: "",
-    type: ""
-  })
+  const [petTypes, setPetTypes] = useState([])
 
   //add use state for errors state for non-core story
   const fetchPetTypes = async () => {
@@ -15,25 +11,33 @@ const PetTypesList = (props) => {
       if (!response.ok) {
         const errorMessage = `${response.status} ${response.statusText}`
         const error = new Error(errorMessage)
-        throw(error)
+        throw (error)
       }
       const responseBody = await response.json()
-      console.log(responseBody.petTypes)
       setPetTypes(responseBody.petTypes)
     } catch (error) {
-      console.error(`error in fetch: ${errorMessage}`)
+      console.error(`error in fetch: ${error}`)
     }
   }
-  
-  //map out tiles
-  
 
-  useEffect(()=>{
+  console.log(petTypes)
+  const petTypeTiles = petTypes.map((petType) => {
+    return (
+      <PetTypeTile
+        key={petType.id}
+        petType={petType}
+      />
+    )
+  })
+
+  useEffect(() => {
     fetchPetTypes()
-  },[])
+  }, [])
 
-  return(
-    <h1>"hello"</h1>
+  return (
+    <div>
+      {petTypeTiles}
+    </div>
   )
 }
 
