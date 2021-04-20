@@ -31,6 +31,8 @@ class Pet {
       throw error
     }
   }
+
+  //findById for pet details page
 }
 
 export default Pet
