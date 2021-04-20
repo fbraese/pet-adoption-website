@@ -20,6 +20,7 @@ const App = props => {
             <Redirect to="/pets" />
           </Route>
           <Route exact path="/pets" component={PetTypesList} />
+          <Route exact path="/pets/:type" />
         </Switch>
       </BrowserRouter>
     </div>
