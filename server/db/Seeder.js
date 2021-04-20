@@ -7,7 +7,6 @@ const pool = new pg.Pool({
   connectionString: "postgres://postgres:password@localhost:5432/pet-adoption-website-development"
 })
 
-//setup __dirname to work with ESM
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -15,17 +14,13 @@ const petTypePath = path.join(__dirname, "../../pet_types.txt")
 
 class Seeder {
   static async seed() {
-    // your seeder code here
     LineReader.eachLine(petTypePath, async (line, last, done) => {
       const [type, img_url, description] = line.split(";")
-      // build our SQL query string
       const queryString = "INSERT INTO pet_types ( type, img_url, description) VALUES ($1, $2, $3);"
 
-      //execute our query
       try {
         const result = await pool.query(queryString, [ type, img_url, description])
         if (last) {
-          //drain the pool because we're done connecting
           console.log("Seeding Complete")
           pool.end()
         }
