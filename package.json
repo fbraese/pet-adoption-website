@@ -9,7 +9,7 @@
     "dev:client": "node_modules/.bin/webpack-dev-server --host 0.0.0.0",
     "webpack": "node_modules/.bin/webpack --config ./webpack.config.js",
     "test": "./node_modules/.bin/jest",
-    "db:import": "psql <replace this with your DB name> < server/db/schema.sql",
+    "db:import": "psql pet-adoption-website-development < server/db/schema.sql",
     "db:seed": "node ./server/bin/seed.js"
   },
   "devDependencies": {
@@ -56,6 +56,7 @@
     "jquery": "^3.6.0",
     "json-loader": "^0.5.4",
     "json2csv": "^4.4.1",
+    "line-reader": "^0.4.0",
     "lodash": "^4.17.11",
     "morgan": "~1.10.0",
     "node-sass": "^4.14.0",
