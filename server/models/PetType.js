@@ -23,3 +23,5 @@ class PetType {
     }
   }
 }
+
+export default PetType
