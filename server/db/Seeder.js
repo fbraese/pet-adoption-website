@@ -23,7 +23,6 @@ class Seeder {
         const result = await pool.query(queryString, [ type, img_url, description])
         if (last) {
           console.log("Seeding Complete 1")
-          // pool.end()
           LineReader.eachLine(adobtablePetsPath, async (line, last, done) => {
             let [name, img_url, age, vaccination_status, adoption_story, available_for_adoption, pet_type_id] = line.split(";")
             if (age.trim() === "") {
@@ -51,9 +50,6 @@ class Seeder {
         done()
       }
     })
-
-
-    // pool.end()
   }
 }
 
