@@ -5,7 +5,7 @@ const pool = new pg.Pool({
 })
 
 class Pet {
-  constructor({ id, name, age, vaccination_status, vaccinationStatus, adoption_story, adoptionStory, available_for_adoption, availableForAdoption, pet_type_id, petTypeId, img_url, imgUrl }) {
+  constructor({ id, name, age, vaccination_status, vaccinationStatus, adoption_story, adoptionStory, available_for_adoption, availableForAdoption, pet_type_id, petTypeId, type, img_url, imgUrl }) {
     this.id = id
     this.name = name
     this.age = age
@@ -13,12 +13,14 @@ class Pet {
     this.adoptionStory = adoptionStory || adoption_story
     this.availableForAdoption = availableForAdoption || available_for_adoption
     this.petTypeId = petTypeId || pet_type_id
+    this.type = type
     this.imgUrl = imgUrl || img_url
   }
 
   static async findByType(type) {
     try {
-      const queryString = "SELECT adoptable_pets.id, adoptable_pets.name, adoptable_pets.age, adoptable_pets.vaccination_status, adoptable_pets.adoption_story, adoptable_pets.available_for_adoption, adoptable_pets.pet_type_id, adoptable_pets.img_url FROM adoptable_pets JOIN pet_types ON pet_types.id = adoptable_pets.pet_type_id WHERE pet_types.type = $1;"
+      // const queryString = "SELECT adoptable_pets.id, adoptable_pets.name, adoptable_pets.age, adoptable_pets.vaccination_status, adoptable_pets.adoption_story, adoptable_pets.available_for_adoption, adoptable_pets.pet_type_id, adoptable_pets.img_url FROM adoptable_pets JOIN pet_types ON pet_types.id = adoptable_pets.pet_type_id WHERE pet_types.type = $1;"
+      const queryString = "SELECT adoptable_pets.id, adoptable_pets.name, adoptable_pets.age, adoptable_pets.vaccination_status, adoptable_pets.adoption_story, adoptable_pets.available_for_adoption, adoptable_pets.pet_type_id, pet_types.type, adoptable_pets.img_url FROM adoptable_pets JOIN pet_types ON pet_types.id = adoptable_pets.pet_type_id WHERE pet_types.type = $1;"
       const result = await pool.query(queryString, [type])
       const petsData = result.rows
       const pets = petsData.map((petData) => {
