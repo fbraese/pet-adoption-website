@@ -31,6 +31,18 @@ class Pet {
       throw error
     }
   }
+  static async findByTypeAndId(type, id) {
+    try {
+      const queryString = "SELECT adoptable_pets.id, adoptable_pets.name, adoptable_pets.age, adoptable_pets.vaccination_status, adoptable_pets.adoption_story, adoptable_pets.available_for_adoption, adoptable_pets.pet_type_id, pet_types.type, adoptable_pets.img_url FROM adoptable_pets JOIN pet_types ON pet_types.id = adoptable_pets.pet_type_id WHERE pet_types.type = $1 AND adoptable_pets.id = $2;"
+      const result = await pool.query(queryString, [type, id])
+      const petData = result.rows[0]
+      const pet = new this(petData)
+      return pet
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
+  }
 }
 
 export default Pet
