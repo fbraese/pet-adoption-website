@@ -31,20 +31,6 @@ class Pet {
       throw error
     }
   }
-  //test this: findById for pet details page
-  //for story 3
-  // static async findByTypeAndId(type, id) {
-  //   try {
-  //     const queryString = "SELECT * FROM adoptable_pets JOIN pet_types ON pet_types.id = adoptable_pets.pet_type_id WHERE pet_types.type = $1 AND adoptable_pets.id = $2;"
-  //     const result = await pool.query(queryString, [type, id])
-  //     const petData = result.rows[0]
-  //     const pet = new this(petData)
-  //     return pet
-  //   } catch (error) {
-  //     console.error(error)
-  //     throw error
-  //   }
-  // }
 }
 
 export default Pet

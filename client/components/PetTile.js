@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 const PetTile = (props) => {
   const { id, name, age, vaccinationStatus, adoptionStory, availableForAdoption, petTypeId, type, imgUrl } = props.pet
@@ -13,14 +14,14 @@ const PetTile = (props) => {
   return (
     <div class="pet-tile">
       <div class="pet-pic">
-        <a href={`/pets/${type}/${id}`}>
+        <Link to={`/pets/${type}/${id}`}>
           <img src={imgUrl} alt={`Picture of pet named ${name}`} />
-        </a>
+        </Link>
       </div>
       <div>
-        <a href={`/pets/${type}/${id}`}>
+        <Link to={`/pets/${type}/${id}`}>
           {name}
-        </a>
+        </Link>
         <h5>
           Age: {age}
         </h5>

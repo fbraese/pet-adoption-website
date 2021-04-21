@@ -4,6 +4,7 @@ import PetTile from "./PetTile.js"
 
 const PetsByType = (props) => {
   const [pets, setPets] = useState([])
+
   const fetchPetsByType = async () => {
     try {
       const petType = props.match.params.type
@@ -15,7 +16,6 @@ const PetsByType = (props) => {
       }
       const responseBody = await response.json()
       setPets(responseBody.pets)
-      console.log(pets)
     } catch (error) {
       console.error(`error in fetch by type: ${error}`)
     }
