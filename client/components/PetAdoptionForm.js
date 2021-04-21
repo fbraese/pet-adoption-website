@@ -13,12 +13,13 @@ const PetAdoptionForm = (props) => {
   const handleChange = (event) => {
     setAdoption({
       ...adoption,
-      [event.currentTaget.id]:event.currentTaget.value 
+      [event.currentTaget.id]:event.currentTaget.value
     })
   }
   //left of at needing to put the handleChange (plus all the rest of the steps)
   return (
-    <form>
+  <form onFormChange={ handleChange }>
+    <div>
       <label htmlFor="name">
         <input type="text" id="name" name="name" />
       </label>
@@ -42,7 +43,8 @@ const PetAdoptionForm = (props) => {
       <label htmlFor="adoptablePetId">
         <input type="text" id="adoptablePetId" name="adoptablePetId" />
       </label>
-    </form>
+    </div>
+  </form>
   )
 }
 
