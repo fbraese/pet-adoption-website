@@ -3,11 +3,13 @@ import React from "react"
 const PetTile = (props) => {
   const { id, name, age, vaccinationStatus, adoptionStory, availableForAdoption, petTypeId, type, imgUrl } = props.pet
   let isVaccinated = ""
+
   if (vaccinationStatus) {
     isVaccinated = "Yes"
   } else {
     isVaccinated = "No"
   }
+
   return (
     <div class="pet-tile">
       <div class="pet-pic">

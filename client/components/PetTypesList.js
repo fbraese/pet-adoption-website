@@ -4,7 +4,6 @@ import PetTypeTile from "./PetTypeTile"
 const PetTypesList = (props) => {
   const [petTypes, setPetTypes] = useState([])
 
-  //add use state for errors state for non-core story
   const fetchPetTypes = async () => {
     try {
       const response = await fetch("/api/v1/petType")

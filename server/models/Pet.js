@@ -19,7 +19,6 @@ class Pet {
 
   static async findByType(type) {
     try {
-      // const queryString = "SELECT adoptable_pets.id, adoptable_pets.name, adoptable_pets.age, adoptable_pets.vaccination_status, adoptable_pets.adoption_story, adoptable_pets.available_for_adoption, adoptable_pets.pet_type_id, adoptable_pets.img_url FROM adoptable_pets JOIN pet_types ON pet_types.id = adoptable_pets.pet_type_id WHERE pet_types.type = $1;"
       const queryString = "SELECT adoptable_pets.id, adoptable_pets.name, adoptable_pets.age, adoptable_pets.vaccination_status, adoptable_pets.adoption_story, adoptable_pets.available_for_adoption, adoptable_pets.pet_type_id, pet_types.type, adoptable_pets.img_url FROM adoptable_pets JOIN pet_types ON pet_types.id = adoptable_pets.pet_type_id WHERE pet_types.type = $1;"
       const result = await pool.query(queryString, [type])
       const petsData = result.rows
