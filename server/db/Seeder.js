@@ -50,6 +50,7 @@ class Seeder {
         done()
       }
     })
+  }
 }
 
 export default Seeder
