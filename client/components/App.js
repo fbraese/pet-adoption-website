@@ -7,6 +7,7 @@ import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom"
 import "../assets/scss/main.scss"
 import PetTypesList from "./PetTypesList"
 import PetsByType from "./PetsByType.js"
+import PetDetailShow from "./PetDetailShow.js"
 
 const App = props => {
   useEffect(() => {
@@ -22,6 +23,7 @@ const App = props => {
           </Route>
           <Route exact path="/pets" component={PetTypesList} />
           <Route exact path="/pets/:type" component={PetsByType} />
+          <Route exact path="/pets/:type/:id" component={PetDetailShow} />
         </Switch>
       </BrowserRouter>
     </div>

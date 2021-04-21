@@ -26,7 +26,7 @@ const PetTile = (props) => {
           Age: {age}
         </h5>
         <h5>
-          {`Vaccination Status: ${isVaccinated}`}
+          Vaccination Status: {isVaccinated}
         </h5>
       </div>
       <p>

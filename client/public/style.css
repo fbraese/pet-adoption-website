@@ -12,6 +12,10 @@ body {
   width: 50%;
 }
 
+.pet-detail {
+  width: 100%;
+}
+
 .pet-pic {
   padding: .5em;
   width: 33%;
