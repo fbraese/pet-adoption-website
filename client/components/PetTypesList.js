@@ -20,7 +20,6 @@ const PetTypesList = (props) => {
     }
   }
 
-  console.log(petTypes)
   const petTypeTiles = petTypes.map((petType) => {
     return (
       <PetTypeTile

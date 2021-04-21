@@ -1,8 +1,7 @@
-import React, { useState } from "react"
+import React from "react"
 
 const PetTypeTile = (props) => {
     const { id, type, description, imgUrl } = props.petType
-    console.log(props)
     return (
         <div>
             <div>
