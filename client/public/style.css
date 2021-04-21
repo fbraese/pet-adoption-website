@@ -1,1 +1,19 @@
-/* your styles, here */
+
+body {
+  padding: 1em;
+}
+
+.pet-container {
+  display:flex;
+  text-align: center;
+}
+
+.pet-tile {
+  width: 50%;
+}
+
+.pet-pic {
+  padding: .5em;
+  width: 33%;
+  margin: auto;
+}

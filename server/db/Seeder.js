@@ -11,6 +11,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const petTypePath = path.join(__dirname, "../../pet_types.txt")
+const adobtablePetsPath = path.join(__dirname, "../../adoptable_pets.txt")
 
 class Seeder {
   static async seed() {
@@ -21,12 +22,31 @@ class Seeder {
       try {
         const result = await pool.query(queryString, [ type, img_url, description])
         if (last) {
-          console.log("Seeding Complete")
-          pool.end()
+          console.log("Seeding Complete 1")
+          LineReader.eachLine(adobtablePetsPath, async (line, last, done) => {
+            let [name, img_url, age, vaccination_status, adoption_story, available_for_adoption, pet_type_id] = line.split(";")
+            if (age.trim() === "") {
+              age = null
+            }
+            const queryString = "INSERT INTO adoptable_pets ( name, img_url, age, vaccination_status, adoption_story, available_for_adoption, pet_type_id ) VALUES ($1, $2, $3, $4, $5, $6, $7);"
+      
+            try {
+              const result = await pool.query(queryString, [ name, img_url, age, vaccination_status, adoption_story, available_for_adoption, pet_type_id ])
+              if (last) {
+                console.log("Seeding Complete 2")
+                pool.end()
+              }
+              done()
+            } catch (error) {
+              console.log(`Inside Error: ${error}`)
+              pool.end()
+              done()
+            }
+          })
         }
         done()
       } catch (error) {
-        console.log(`Error: ${error}`)
+        console.log(`Outside Error: ${error}`)
         done()
       }
     })
