@@ -9,7 +9,7 @@ class Pet {
     this.id = id
     this.name = name
     this.age = age
-    this.vaccinationStatus = vaccination_status || vaccinationStatus
+    this.vaccinationStatus = vaccinationStatus || vaccination_status
     this.adoptionStory = adoptionStory || adoption_story
     this.availableForAdoption = availableForAdoption || available_for_adoption
     this.petTypeId = petTypeId || pet_type_id
@@ -18,21 +18,32 @@ class Pet {
 
   static async findByType(type) {
     try {
-      //Select adoptable pets where type_id matches type from req.params.id
-      //id from pet_types & type_id from adoptable_pets
-      const queryString = "SELECT * FROM adoptable_pets JOIN pet_types ON pet_types.id = adoptable_pets.pet_type_id WHERE pet_types.type = $1;"
+      const queryString = "SELECT adoptable_pets.id, adoptable_pets.name, adoptable_pets.age, adoptable_pets.vaccination_status, adoptable_pets.adoption_story, adoptable_pets.available_for_adoption, adoptable_pets.pet_type_id, adoptable_pets.img_url FROM adoptable_pets JOIN pet_types ON pet_types.id = adoptable_pets.pet_type_id WHERE pet_types.type = $1;"
       const result = await pool.query(queryString, [type])
       const petsData = result.rows
-      const pets = petsData.map((petData) => { new this(petData) })
-      console.log(petType)
+      const pets = petsData.map((petData) => {
+        return new this(petData)
+      })
       return pets
     } catch (error) {
       console.error(error)
       throw error
     }
   }
-
-  //findById for pet details page
+  //test this: findById for pet details page
+  //for story 3
+  // static async findByTypeAndId(type, id) {
+  //   try {
+  //     const queryString = "SELECT * FROM adoptable_pets JOIN pet_types ON pet_types.id = adoptable_pets.pet_type_id WHERE pet_types.type = $1 AND adoptable_pets.id = $2;"
+  //     const result = await pool.query(queryString, [type, id])
+  //     const petData = result.rows[0]
+  //     const pet = new this(petData)
+  //     return pet
+  //   } catch (error) {
+  //     console.error(error)
+  //     throw error
+  //   }
+  // }
 }
 
 export default Pet

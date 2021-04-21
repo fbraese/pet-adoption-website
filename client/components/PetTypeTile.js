@@ -5,12 +5,14 @@ const PetTypeTile = (props) => {
     return (
         <div>
             <div>
-                <img src={imgUrl} />
+                <img src={imgUrl} alt={`Picture of a ${type}`} />
             </div>
             <h3>
                 {type}
             </h3>
-            {description}
+            <p>
+                {description}
+            </p>
         </div>
     )
 }
