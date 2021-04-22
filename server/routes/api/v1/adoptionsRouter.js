@@ -1,15 +1,16 @@
 import express from "express"
+import Adoption from "../../../models/Adoption.js"
 
 const adoptionsRouter = new express.Router()
 
 adoptionsRouter.post("/", async (req, res) => {
   try {
-    
-    // const pet = await Pet.findByTypeAndId(req.params.type, req.params.id)
-    // res.status(200).json({ pet: pet })
+    const adoptionEntry = new Adoption(req.body)
+    await adoptionEntry.save()
+    res.status(201).json({adoption: adoptionEntry})
   } catch (error) {
-    // console.error("Error from petTypeRouter findByTypeAndId get request", error)
-    // res.status(500).json({ errors: error })
+    console.error("Error from adoptionsRouter (post route)", error)
+    res.status(500).json({ errors: error })
   }
 })
 

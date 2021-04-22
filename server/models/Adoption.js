@@ -17,9 +17,13 @@ class Adoption {
 
   async save() {
     try {
-      const 
-    } catch (error) {
-
+      const queryString = "INSERT INTO adoption_applications(name, phone_number, email, home_status, adoptable_pet_id) VALUES ($1,$2,$3,$4,$5) RETURNING id;"
+      const adoptionId = await pool.query(queryString, [this.name, this.phoneNumber, this.email, this.homeStatus, this.adoptablePetId])
+      this.id = adoptionId.rows[0].id
+      return true
+    } catch(error) {
+      console.error(error)
+      throw error
     }
   }
 }

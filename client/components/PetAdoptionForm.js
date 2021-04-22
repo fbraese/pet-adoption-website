@@ -1,4 +1,3 @@
-//aded import to petType page for testing! remove when done!!!
 import React, {useState} from "react"
 
 import ErrorList from "./ErrorsList"
@@ -10,8 +9,7 @@ const PetAdoptionForm = (props) => {
     phoneNumber: "",
     email: "",
     homeStatus: "",
-    applicationStatus: "",
-    adoptablePetId: "",
+    adoptablePetId: props.petId,
   })
 
   const handleInputChange = (event) => {
@@ -25,15 +23,12 @@ const PetAdoptionForm = (props) => {
     event.preventDefault()
     if (isValid()) {
       addPetForAdoption()
-    } else {
-      console.log("form Not submitted!")
-    }
+    } 
   }
 
   const addPetForAdoption = async () => {
     try {
-      //do we need a new api endpoint ?? how do we interact with DB with all pets
-      const response = await fetch("/api/v1/petType", {
+      const response = await fetch("/api/v1/adoptions", {
         method: "POST",
         headers: new Headers ({
           "Content-Type": "application/json",
@@ -46,8 +41,10 @@ const PetAdoptionForm = (props) => {
       }
       const responseBody = await response.json()
       console.log("posted succesfully", responseBody)
-      setErrors({}) // to force re-render on success
+      setErrors({})
       clearForm()
+      props.displayMessage()
+      props.onSubmitFormVisibility()
     } catch (error) {
       console.error("error in form fetch POST", error)
     }
@@ -74,8 +71,7 @@ const PetAdoptionForm = (props) => {
       phoneNumber: "",
       email: "",
       homeStatus: "",
-      applicationStatus: "",
-      adoptablePetId: "",
+      adoptablePetId: props.petId,
     })
   }
 
