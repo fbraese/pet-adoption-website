@@ -2,9 +2,9 @@ import express from "express"
 
 import SurrenderApplication from "../../../models/SurrenderApplication.js"
 
-const surrenderRouter = new express.Router()
+const surrendersRouter = new express.Router()
 
-surrenderRouter.post("/", async (req, res) => {
+surrendersRouter.post("/", async (req, res) => {
   try {
     const newSurrender = new SurrenderApplication(req.body)
     const petId = await newPet.save()
@@ -16,4 +16,4 @@ surrenderRouter.post("/", async (req, res) => {
   }
 })
 
-export default surrenderRouter
+export default surrendersRouter

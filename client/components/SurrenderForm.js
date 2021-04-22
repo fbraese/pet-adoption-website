@@ -17,7 +17,6 @@ const SurrenderForm = (props) => {
   })
 
   const handleInputChange = (event) => {
-
     setSurrender({
       ...surrender,
       [event.currentTarget.id]: event.currentTarget.value,
@@ -29,13 +28,13 @@ const SurrenderForm = (props) => {
     if (isValid()) {
       addPetForSurrender()
     } else {
-      console.log("form Not submitted!")
+      console.log("Inputs not valid!")
     }
   }
 
   const addPetForSurrender = async () => {
     try {
-      const response = await fetch("/api/v1/surrender", {
+      const response = await fetch("/api/v1/surrenders", {
         method: "POST",
         headers: new Headers({
           "Content-Type": "application/json",

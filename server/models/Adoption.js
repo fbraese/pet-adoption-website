@@ -5,7 +5,7 @@ const pool = new pg.Pool({
 })
 
 class Adoption {
-  constructor({ id, name, phoneNumber, phone_number, email, homeStatus, home_status, applicationStatus, application_status, adoptablePetId, adoptable_pet_id}) {
+  constructor({ id, name, phoneNumber, phone_number, email, homeStatus, home_status, applicationStatus, application_status, adoptablePetId, adoptable_pet_id }) {
     this.id = id
     this.name = name
     this.phoneNumber = phoneNumber || phone_number
@@ -21,7 +21,7 @@ class Adoption {
       const adoptionId = await pool.query(queryString, [this.name, this.phoneNumber, this.email, this.homeStatus, this.adoptablePetId])
       this.id = adoptionId.rows[0].id
       return true
-    } catch(error) {
+    } catch (error) {
       console.error(error)
       throw error
     }
