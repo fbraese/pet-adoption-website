@@ -21,3 +21,7 @@ body {
   width: 33%;
   margin: auto;
 }
+
+.is-hidden {
+  visibility: hidden;
+}

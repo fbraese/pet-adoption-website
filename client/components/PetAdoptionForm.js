@@ -1,5 +1,4 @@
-//aded import to petType page for testing! remove when done!!!
-import React, {useState} from "react"
+import React, { useState } from "react"
 
 import ErrorList from "./ErrorsList"
 
@@ -9,9 +8,7 @@ const PetAdoptionForm = (props) => {
     name: "",
     phoneNumber: "",
     email: "",
-    homeStatus: "",
-    applicationStatus: "",
-    adoptablePetId: "",
+    homeStatus: ""
   })
 
   const handleInputChange = (event) => {
@@ -25,29 +22,30 @@ const PetAdoptionForm = (props) => {
     event.preventDefault()
     if (isValid()) {
       addPetForAdoption()
-    } else {
-      console.log("form Not submitted!")
     }
   }
 
   const addPetForAdoption = async () => {
     try {
-      //do we need a new api endpoint ?? how do we interact with DB with all pets
-      const response = await fetch("/api/v1/petType", {
+      const adoptionData = {
+        ...adoption,
+        adoptablePetId: props.petId
+      }
+      const response = await fetch("/api/v1/adoptions", {
         method: "POST",
-        headers: new Headers ({
+        headers: new Headers({
           "Content-Type": "application/json",
         }),
-        body: JSON.stringify(adoption)
+        body: JSON.stringify(adoptionData)
       })
-      if(!response.ok) {
+      if (!response.ok) {
         const errorMessage = `${response.status} ${response.statusText}`
         throw new Error(errorMessage)
       }
       const responseBody = await response.json()
-      console.log("posted succesfully", responseBody)
-      setErrors({}) // to force re-render on success
       clearForm()
+      props.displayMessage()
+      props.onSubmitFormVisibility()
     } catch (error) {
       console.error("error in form fetch POST", error)
     }
@@ -62,7 +60,7 @@ const PetAdoptionForm = (props) => {
           ...submitErrors,
           [field]: "is blank"
         }
-      } 
+      }
     })
     setErrors(submitErrors)
     return Object.entries(submitErrors).length === 0 && submitErrors.constructor === Object
@@ -73,42 +71,41 @@ const PetAdoptionForm = (props) => {
       name: "",
       phoneNumber: "",
       email: "",
-      homeStatus: "",
-      applicationStatus: "",
-      adoptablePetId: "",
+      homeStatus: ""
     })
+    setErrors({})
   }
 
   return (
     <div>
-      <ErrorList errors={errors}/>
+      <ErrorList errors={errors} />
       <form onSubmit={submitHandler}>
         <div>
           <label htmlFor="name">Name:
-            <input 
-              type="text" 
-              id="name" 
-              name="name" 
+            <input
+              type="text"
+              id="name"
+              name="name"
               onChange={handleInputChange}
               value={adoption.name}
             />
           </label>
 
           <label htmlFor="phoneNumber">Phone Number:
-            <input 
-              type="text" 
-              id="phoneNumber" 
-              name="phoneNumber" 
+            <input
+              type="text"
+              id="phoneNumber"
+              name="phoneNumber"
               onChange={handleInputChange}
               value={adoption.phoneNumber}
             />
           </label>
 
           <label htmlFor="email">Email:
-            <input 
-              type="text" 
-              id="email" 
-              name="email" 
+            <input
+              type="text"
+              id="email"
+              name="email"
               onChange={handleInputChange}
               value={adoption.email}
             />
@@ -116,13 +113,13 @@ const PetAdoptionForm = (props) => {
 
           <label htmlFor="homeStatus">Home status:
             <select name="homeStatus" id="homeStatus" onChange={handleInputChange} value={adoption.homeStatus}>
-            <option value=""></option>
+              <option value=""></option>
               <option value="own">Own</option>
               <option value="rent">Rent </option>
             </select>
           </label>
 
-          <input type="submit" value="Submit Form"/>
+          <input type="submit" value="Submit Form" />
         </div>
       </form>
     </div>

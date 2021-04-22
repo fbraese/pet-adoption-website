@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react"
 
+import PetAdoptionForm from "./PetAdoptionForm"
+
 const PetDetailShow = (props) => {
-
   const [showErrors, setShowErrors] = useState(false)
-
+  const [formVisibility, setFormVisibility] = useState("is-hidden")
+  const [messageVisibility, setMessageVisibility] = useState("is-hidden")
   const [pet, setPet] = useState({
     id: "",
     name: "",
@@ -47,7 +49,18 @@ const PetDetailShow = (props) => {
     isVaccinated = "No"
   }
 
-  let errorString = ""
+  const onClickHandler = (event) => {
+    event.preventDefault()
+    setFormVisibility("")
+  }
+
+  const onSubmitFormVisibility = () => {
+    setFormVisibility("is-hidden")
+  }
+
+  const displayMessage = () => {
+    setMessageVisibility("")
+  }
 
   if (showErrors) {
     return (
@@ -75,6 +88,13 @@ const PetDetailShow = (props) => {
           <p>
             {pet.adoptionStory}
           </p>
+          <div className={messageVisibility}>
+            <h3>Your request is in process</h3>
+          </div>
+          <input type="button" value="adopt me!" onClick={onClickHandler}/>
+          <div className={formVisibility}>
+            <PetAdoptionForm onSubmitFormVisibility={onSubmitFormVisibility} petId={petId} displayMessage={displayMessage}/>
+          </div>
         </div>
       </div>
     )
