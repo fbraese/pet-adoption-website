@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import ErrorList from "./ErrorsList"
 
 const SurrenderForm = (props) => {
   const [message, setMessage] = useState("")
   const [errors, setErrors] = useState({})
+  const [petTypes, setPetTypes] = useState([])
   const [surrender, setSurrender] = useState({
     personName: "",
     phoneNumber: "",
@@ -14,6 +15,10 @@ const SurrenderForm = (props) => {
     imgUrl: "",
     vaccinationStatus: "",
     adoptionStory: "",
+  })
+
+  const petTypeOptions = petTypes.map((type) => {
+    return <option value={type.id}>{type.type}</option>
   })
 
   const handleInputChange = (event) => {
@@ -27,8 +32,21 @@ const SurrenderForm = (props) => {
     event.preventDefault()
     if (isValid()) {
       addPetForSurrender()
-    } else {
-      console.log("Inputs not valid!")
+    }
+  }
+
+  const fetchPetTypes = async () => {
+    try {
+      const response = await fetch("/api/v1/petType")
+      if (!response.ok) {
+        const errorMessage = `${response.status} ${response.statusText}`
+        const error = new Error(errorMessage)
+        throw (error)
+      }
+      const responseBody = await response.json()
+      setPetTypes(responseBody.petTypes)
+    } catch (error) {
+      console.error(`error in fetch: ${error}`)
     }
   }
 
@@ -46,9 +64,7 @@ const SurrenderForm = (props) => {
         throw new Error(errorMessage)
       }
       const responseBody = await response.json()
-      console.log("posted succesfully", responseBody)
       setMessage("Your surrender request is in process.")
-      setErrors({})
       clearForm()
     } catch (error) {
       console.error("error in form fetch POST", error)
@@ -85,6 +101,10 @@ const SurrenderForm = (props) => {
     })
     setErrors({})
   }
+
+  useEffect(() => {
+    fetchPetTypes()
+  }, [])
 
   return (
     <div>
@@ -145,9 +165,7 @@ const SurrenderForm = (props) => {
           <label htmlFor="petTypeId">Pet Type:
             <select name="petTypeId" id="petTypeId" onChange={handleInputChange}>
               <option value=""></option>
-              <option value="2">cat</option>
-              <option value="1">dog </option>
-              <option value="3">mythical creature</option>
+              {petTypeOptions}
             </select>
           </label>
 
