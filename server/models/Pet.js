@@ -5,9 +5,9 @@ const pool = new pg.Pool({
 })
 
 class Pet {
-  constructor({ id, name, petName, age, vaccination_status, vaccinationStatus, adoption_story, adoptionStory, available_for_adoption, availableForAdoption, pet_type_id, petTypeId, type, img_url, imgUrl }) {
+  constructor({ id, name, age, vaccination_status, vaccinationStatus, adoption_story, adoptionStory, available_for_adoption, availableForAdoption, pet_type_id, petTypeId, type, img_url, imgUrl }) {
     this.id = id
-    this.name = name || petName
+    this.name = name
     this.age = age
     this.vaccinationStatus = vaccinationStatus || vaccination_status
     this.adoptionStory = adoptionStory || adoption_story
@@ -31,7 +31,7 @@ class Pet {
       throw error
     }
   }
-  
+
   static async findByTypeAndId(type, id) {
     try {
       const queryString = "SELECT adoptable_pets.id, adoptable_pets.name, adoptable_pets.age, adoptable_pets.vaccination_status, adoptable_pets.adoption_story, adoptable_pets.available_for_adoption, adoptable_pets.pet_type_id, pet_types.type, adoptable_pets.img_url FROM adoptable_pets JOIN pet_types ON pet_types.id = adoptable_pets.pet_type_id WHERE pet_types.type = $1 AND adoptable_pets.id = $2;"

@@ -5,9 +5,9 @@ const pool = new pg.Pool({
 })
 
 class SurrenderApplication {
-  constructor({ id, name, personName, phoneNumber, phone_number, email, adoptablePetId, adoptable_pet_id, status }) {
+  constructor({ id, name, phoneNumber, phone_number, email, adoptablePetId, adoptable_pet_id, status }) {
     this.id = id
-    this.name = name || personName
+    this.name = name
     this.phoneNumber = phoneNumber || phone_number
     this.email = email
     this.adoptablePetId = adoptablePetId || adoptable_pet_id
