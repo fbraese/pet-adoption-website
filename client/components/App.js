@@ -5,9 +5,7 @@ import $ from "jquery"
 import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom"
 
 import "../assets/scss/main.scss"
-import PetTypesList from "./PetTypesList"
-import PetsByType from "./PetsByType.js"
-import PetDetailShow from "./PetDetailShow.js"
+import NavBar from "./NavBar.js"
 
 const App = props => {
   useEffect(() => {
@@ -17,14 +15,7 @@ const App = props => {
   return (
     <div className="callout primary">
       <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            <Redirect to="/pets" />
-          </Route>
-          <Route exact path="/pets" component={PetTypesList} />
-          <Route exact path="/pets/:type" component={PetsByType} />
-          <Route exact path="/pets/:type/:id" component={PetDetailShow} />
-        </Switch>
+        <Route path="/" component={NavBar} />
       </BrowserRouter>
     </div>
   )
