@@ -1,6 +1,11 @@
 Fido; https://i.imgur.com/3NEapy2.jpg; 7; t; This is an adoption story; t; 1
-Kitty; https://imgur.com/r/cats/HR93ZF2; 4; f; This is a cat's adoption story; t; 2
+Kitty; https://i.imgur.com/62a4Gk5.jpg; 4; f; This is a cat's adoption story; t; 2
 Smaug; https://i.imgur.com/bF8n4fC.jpg;; f; This is a dragon's adoption story; f; 3
 Uni the Unicorn; https://i.imgur.com/cryx8S2.jpg;; t; Uni is a sad unicorn; t; 3
 Chip; https://i.imgur.com/kjQqzFJ.jpg; 1; f; Chip is a kitten; t; 2
-Hunter; https://i.imgur.com/T0IYOxe.jpg?1; 3; t; Hunter loves to play fetch; t; 1
+Hunter; https://i.imgur.com/oo67PIH.jpg; 3; t; Hunter loves to play fetch; t; 1
+Gunther; https://i.imgur.com/VA0ndKa.jpg; 99; t; Gunther is a gnome who would love to go home with you!; t; 3
+Derpderp; https://i.imgur.com/ThWoXl7.jpg; 5; f; He's a little goofy looking, but full of love.; f; 1
+Emerald; https://i.imgur.com/bkeH2Uz.jpg; 8; t; Those green eyes are looking at you for a forever home!; t; 2
+Sasquatch; https://i.imgur.com/DjIG0g0.jpg; 50; f; Sas is currently missing. Have you spotted him?; f; 3
+Cordial; https://i.imgur.com/skwFg0N.jpg; 4; t; She's a good pup!; t; 1

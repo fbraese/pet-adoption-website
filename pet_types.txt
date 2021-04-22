@@ -1,3 +1,3 @@
 dog; https://i.imgur.com/SSdt1C4.jpg; Dog's are popularly known as "Man's Best Friend".
-cat; https://i.imgur.com/2bvab7y.jpg; Cat's make a purrrrrfect companion.
+cat; https://i.imgur.com/iUynBxS.jpg; Cat's make a purrrrrfect companion.
 mythical_creatures; https://i.imgur.com/k5BWr2K.jpg; Fire breathing, menancing. Also some adorably cute companions.
