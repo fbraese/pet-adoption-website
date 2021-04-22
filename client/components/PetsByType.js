@@ -35,7 +35,7 @@ const PetsByType = (props) => {
   }, [petType])
 
   return (
-    <div class="pet-container">
+    <div className="pet-container">
       {petsTiles}
     </div>
   )

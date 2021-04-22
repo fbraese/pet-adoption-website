@@ -80,7 +80,7 @@ const PetAdoptionForm = (props) => {
     <div>
       <ErrorList errors={errors}/>
       <form onSubmit={submitHandler}>
-        <div>
+        <div className="adoption-form">
           <label htmlFor="name">Name:
             <input 
               type="text" 

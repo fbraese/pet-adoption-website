@@ -10,12 +10,12 @@ const NavBar = (props) => {
 
   return (
     <div>
-      <nav>
-      <Link to="/pets">Back to home page</Link>
-      <Link to="/pets/dog">Dogs</Link>
-      <Link to="/pets/cat">Cats</Link>
-      <Link to="/pets/mythical_creatures">Mythical Creatures</Link>
-      <Link to="/adoptions/new">List a pet for adoption</Link>
+      <nav className= "grid-x navbar solid-border-bottom">
+        <Link className="links" to="/pets">Home page</Link> |
+        <Link className="links" to="/pets/dog">Dogs</Link> |
+        <Link className="links" to="/pets/cat">Cats</Link> |
+        <Link className="links" to="/pets/mythical_creatures">Mythical Creatures</Link> |
+        <Link className="links" to="/adoptions/new">List a pet for adoption</Link> 
       </nav>
       <div>
       <Switch>
