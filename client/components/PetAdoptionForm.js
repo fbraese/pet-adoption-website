@@ -8,8 +8,7 @@ const PetAdoptionForm = (props) => {
     name: "",
     phoneNumber: "",
     email: "",
-    homeStatus: "",
-    adoptablePetId: props.petId,
+    homeStatus: ""
   })
 
   const handleInputChange = (event) => {
@@ -28,20 +27,22 @@ const PetAdoptionForm = (props) => {
 
   const addPetForAdoption = async () => {
     try {
+      const adoptionData = {
+        ...adoption,
+        adoptablePetId: props.petId
+      }
       const response = await fetch("/api/v1/adoptions", {
         method: "POST",
         headers: new Headers ({
           "Content-Type": "application/json",
         }),
-        body: JSON.stringify(adoption)
+        body: JSON.stringify(adoptionData)
       })
       if(!response.ok) {
         const errorMessage = `${response.status} ${response.statusText}`
         throw new Error(errorMessage)
       }
       const responseBody = await response.json()
-      console.log("posted succesfully", responseBody)
-      setErrors({})
       clearForm()
       props.displayMessage()
       props.onSubmitFormVisibility()
@@ -70,9 +71,9 @@ const PetAdoptionForm = (props) => {
       name: "",
       phoneNumber: "",
       email: "",
-      homeStatus: "",
-      adoptablePetId: props.petId,
+      homeStatus: ""
     })
+    setErrors({})
   }
 
   return (

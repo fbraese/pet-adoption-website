@@ -4,11 +4,8 @@ import PetAdoptionForm from "./PetAdoptionForm"
 
 const PetDetailShow = (props) => {
   const [showErrors, setShowErrors] = useState(false)
-
   const [formVisibility, setFormVisibility] = useState("is-hidden")
-
   const [messageVisibility, setMessageVisibility] = useState("is-hidden")
-
   const [pet, setPet] = useState({
     id: "",
     name: "",
