@@ -18,7 +18,11 @@ const SurrenderForm = (props) => {
   })
 
   const petTypeOptions = petTypes.map((type) => {
-    return <option value={type.id}>{type.type}</option>
+    return <option
+      key={type.id}
+      value={type.id}>
+      {type.type}
+    </option>
   })
 
   const handleInputChange = (event) => {
