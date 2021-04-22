@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS pet_types CASCADE;
-DROP TABLE IF EXISTS adoptable_pets;
+DROP TABLE IF EXISTS adoptable_pets CASCADE;
 DROP TABLE IF EXISTS adoption_applications;
 DROP TABLE IF EXISTS surrender_applications;
 
@@ -34,7 +34,7 @@ CREATE TABLE adoption_applications(
 CREATE TABLE surrender_applications(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    phone_number INTEGER NOT NULL,
+    phone_number VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     adoptable_pet_id INTEGER REFERENCES adoptable_pets(id),
     status VARCHAR(255) DEFAULT 'pending'

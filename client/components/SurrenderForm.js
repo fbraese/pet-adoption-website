@@ -2,24 +2,25 @@ import React, { useState } from "react"
 import ErrorList from "./ErrorsList"
 
 const SurrenderForm = (props) => {
+  const [message, setMessage] = useState("")
   const [errors, setErrors] = useState({})
   const [surrender, setSurrender] = useState({
-    name: "",
+    personName: "",
     phoneNumber: "",
     email: "",
-    adoptablePetId: "",
-    status: "",
+    petName: "",
     age: "",
-    petType: "",
+    petTypeId: "",
     imgUrl: "",
     vaccinationStatus: "",
-
+    adoptionStory: "",
   })
 
   const handleInputChange = (event) => {
+
     setSurrender({
       ...surrender,
-      [event.currentTarget.id]: event.currentTarget.value
+      [event.currentTarget.id]: event.currentTarget.value,
     })
   }
 
@@ -34,8 +35,7 @@ const SurrenderForm = (props) => {
 
   const addPetForSurrender = async () => {
     try {
-      //do we need a new api endpoint ?? how do we interact with DB with all pets
-      const response = await fetch("/api/v1/petType", {
+      const response = await fetch("/api/v1/surrender", {
         method: "POST",
         headers: new Headers({
           "Content-Type": "application/json",
@@ -48,7 +48,8 @@ const SurrenderForm = (props) => {
       }
       const responseBody = await response.json()
       console.log("posted succesfully", responseBody)
-      setErrors({}) // to force re-render on success
+      setMessage("Your surrender request is in process.")
+      setErrors({})
       clearForm()
     } catch (error) {
       console.error("error in form fetch POST", error)
@@ -57,7 +58,7 @@ const SurrenderForm = (props) => {
 
   const isValid = () => {
     let submitErrors = {}
-    const requiredFields = ['name', 'phoneNumber', 'email']
+    const requiredFields = ['personName', 'phoneNumber', 'email', 'petName', 'age', 'petTypeId', 'imgUrl', 'vaccinationStatus', 'adoptionStory']
     requiredFields.forEach(field => {
       if (surrender[field].trim() === "") {
         submitErrors = {
@@ -66,33 +67,39 @@ const SurrenderForm = (props) => {
         }
       }
     })
+
     setErrors(submitErrors)
     return Object.entries(submitErrors).length === 0 && submitErrors.constructor === Object
   }
 
   const clearForm = () => {
-    setsurrender({
-      name: "",
+    setSurrender({
+      personName: "",
       phoneNumber: "",
       email: "",
-      homeStatus: "",
-      applicationStatus: "",
-      adoptablePetId: "",
+      petName: "",
+      age: "",
+      petTypeId: "",
+      imgUrl: "",
+      vaccinationStatus: "",
+      adoptionStory: "",
     })
+    setErrors({})
   }
 
   return (
     <div>
       <ErrorList errors={errors} />
+      <h4>{message}</h4>
       <form onSubmit={submitHandler}>
         <div>
-          <label htmlFor="name">Name:
+          <label htmlFor="personName">Name:
             <input
               type="text"
-              id="name"
-              name="name"
+              id="personName"
+              name="personName"
               onChange={handleInputChange}
-              value={surrender.name}
+              value={surrender.personName}
             />
           </label>
 
@@ -116,13 +123,60 @@ const SurrenderForm = (props) => {
             />
           </label>
 
-          <label htmlFor="petType">Pet Type:
-            <select name="petType" id="petType" onChange={handleInputChange} value={surrender.petType}>
+          <label htmlFor="petName">Pet Name:
+            <input
+              type="text"
+              id="petName"
+              name="petName"
+              onChange={handleInputChange}
+              value={surrender.petName}
+            />
+          </label>
+
+          <label htmlFor="age">Age:
+            <input
+              type="text"
+              id="age"
+              name="age"
+              onChange={handleInputChange}
+              value={surrender.age}
+            />
+          </label>
+
+          <label htmlFor="petTypeId">Pet Type:
+            <select name="petTypeId" id="petTypeId" onChange={handleInputChange}>
               <option value=""></option>
-              <option value="cat">Cat</option>
-              <option value="dog">Dog </option>
-              <option value="mythical-creature">Mythical Creature </option>
+              <option value="2">cat</option>
+              <option value="1">dog </option>
+              <option value="3">mythical creature</option>
             </select>
+          </label>
+
+          <label htmlFor="imgUrl">Pet Photo:
+            <input
+              type="text"
+              id="imgUrl"
+              name="imgUrl"
+              onChange={handleInputChange}
+              value={surrender.imgUrl}
+            />
+          </label>
+          <label htmlFor="vaccinationStatus">Pet is Vaccinated:
+            <select name="vaccinationStatus" id="vaccinationStatus" onChange={handleInputChange} value={surrender.vaccinationStatus}>
+              <option value=""></option>
+              <option value="true">true</option>
+              <option value="false">false </option>
+            </select>
+          </label>
+
+          <label htmlFor="adoptionStory">Adopt Me Story:
+            <input
+              type="text"
+              id="adoptionStory"
+              name="adoptionStory"
+              onChange={handleInputChange}
+              value={surrender.adoptionStory}
+            />
           </label>
 
           <input type="submit" value="Submit Form" />
@@ -131,5 +185,4 @@ const SurrenderForm = (props) => {
     </div>
   )
 }
-
 export default SurrenderForm

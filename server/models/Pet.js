@@ -5,9 +5,9 @@ const pool = new pg.Pool({
 })
 
 class Pet {
-  constructor({ id, name, age, vaccination_status, vaccinationStatus, adoption_story, adoptionStory, available_for_adoption, availableForAdoption, pet_type_id, petTypeId, type, img_url, imgUrl }) {
+  constructor({ id, name, petName, age, vaccination_status, vaccinationStatus, adoption_story, adoptionStory, available_for_adoption, availableForAdoption, pet_type_id, petTypeId, type, img_url, imgUrl }) {
     this.id = id
-    this.name = name
+    this.name = name || petName
     this.age = age
     this.vaccinationStatus = vaccinationStatus || vaccination_status
     this.adoptionStory = adoptionStory || adoption_story
@@ -38,6 +38,18 @@ class Pet {
       const petData = result.rows[0]
       const pet = new this(petData)
       return pet
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
+  }
+
+  async save() {
+    try {
+      const queryString = "INSERT INTO adoptable_pets (name, age, vaccination_status, adoption_story, available_for_adoption, pet_type_id, img_url) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id;"
+      const result = await pool.query(queryString, [this.name, this.age, this.vaccinationStatus, this.adoptionStory, this.availableForAdoption, this.petTypeId, this.imgUrl])
+      this.id = result.rows[0].id
+      return this.id
     } catch (error) {
       console.error(error)
       throw error
