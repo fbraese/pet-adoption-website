@@ -12,8 +12,8 @@ const PetTile = (props) => {
   }
 
   return (
-    <div class="pet-tile">
-      <div class="pet-pic">
+    <div className="pet-tile">
+      <div className="pet-pic">
         <Link to={`/pets/${type}/${id}`}>
           <img src={imgUrl} alt={`Picture of pet named ${name}`} />
         </Link>

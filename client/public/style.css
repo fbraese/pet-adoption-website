@@ -25,3 +25,28 @@ body {
 .is-hidden {
   visibility: hidden;
 }
+
+.navbar {
+  background-color: #b0d5ff;
+  margin-bottom: 10px;
+}
+
+.solid-border-bottom{
+  border-bottom: 0.25rem solid gray;
+}
+.links {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+img {
+  width: 20rem;
+}
+
+.pet-type-tile {
+  margin-bottom: 3rem;
+}
+
+.adoption-form {
+  width:50%;
+}

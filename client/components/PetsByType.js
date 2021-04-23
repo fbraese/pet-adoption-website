@@ -4,10 +4,10 @@ import PetTile from "./PetTile.js"
 
 const PetsByType = (props) => {
   const [pets, setPets] = useState([])
+  const petType = props.match.params.type
 
   const fetchPetsByType = async () => {
     try {
-      const petType = props.match.params.type
       const response = await fetch(`/api/v1/petType/${petType}`)
       if (!response.ok) {
         const errorMessage = `${response.status} ${response.statusText}`
@@ -32,10 +32,10 @@ const PetsByType = (props) => {
 
   useEffect(() => {
     fetchPetsByType()
-  }, [])
+  }, [petType])
 
   return (
-    <div class="pet-container">
+    <div className="pet-container">
       {petsTiles}
     </div>
   )
