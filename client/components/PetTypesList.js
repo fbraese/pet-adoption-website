@@ -34,9 +34,11 @@ const PetTypesList = (props) => {
 
   return (
     <div>
-      <h2>Full Stack Force Adoption Agency</h2>
-      <p>Find your favorite type of pet below</p>
-      <div>
+      <div className="home">
+        <h2>Full Stack Force Pet Rescue</h2>
+        <p>Find your favorite type of pet below</p>
+      </div>
+      <div className="grid-x">
         {petTypeTiles}
       </div>
     </div>

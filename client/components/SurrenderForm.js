@@ -111,10 +111,11 @@ const SurrenderForm = (props) => {
   }, [])
 
   return (
-    <div>
+    <div className="home">
       <ErrorList errors={errors} />
       <h4>{message}</h4>
-      <form onSubmit={submitHandler}>
+      <h3>Surrender Pet for Adoption</h3>
+      <form onSubmit={submitHandler} className="adoption-form">
         <div>
           <label htmlFor="personName">Name:
             <input
