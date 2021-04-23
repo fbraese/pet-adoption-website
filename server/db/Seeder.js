@@ -11,43 +11,64 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const petTypePath = path.join(__dirname, "../../pet_types.txt")
-const adobtablePetsPath = path.join(__dirname, "../../adoptable_pets.txt")
+const adoptablePetsPath = path.join(__dirname, "../../adoptable_pets.txt")
+const surrenderApplicationsPath = path.join(__dirname, "../../surrender_applications.txt")
 
 class Seeder {
   static async seed() {
+    //Pet Type Seeding
     LineReader.eachLine(petTypePath, async (line, last, done) => {
       const [type, img_url, description] = line.split(";")
       const queryString = "INSERT INTO pet_types ( type, img_url, description) VALUES ($1, $2, $3);"
 
       try {
-        const result = await pool.query(queryString, [ type, img_url, description])
+        const result = await pool.query(queryString, [type, img_url, description])
         if (last) {
           console.log("Seeding Complete 1")
-          LineReader.eachLine(adobtablePetsPath, async (line, last, done) => {
+
+          //Adoptable Pet Seeding
+          LineReader.eachLine(adoptablePetsPath, async (line, last, done) => {
             let [name, img_url, age, vaccination_status, adoption_story, available_for_adoption, pet_type_id] = line.split(";")
             if (age.trim() === "") {
               age = null
             }
             const queryString = "INSERT INTO adoptable_pets ( name, img_url, age, vaccination_status, adoption_story, available_for_adoption, pet_type_id ) VALUES ($1, $2, $3, $4, $5, $6, $7);"
-      
             try {
-              const result = await pool.query(queryString, [ name, img_url, age, vaccination_status, adoption_story, available_for_adoption, pet_type_id ])
+              const result = await pool.query(queryString, [name, img_url, age, vaccination_status, adoption_story, available_for_adoption, pet_type_id])
               if (last) {
                 console.log("Seeding Complete 2")
-                pool.end()
+
+                //SEEDING 3 for Surrender Applications
+                LineReader.eachLine(surrenderApplicationsPath, async (line, last, done) => {
+                  let [name, phone_number, email, adoptable_pet_id] = line.split(";")
+                  const queryString = "INSERT INTO surrender_applications (name, phone_number, email, adoptable_pet_id) VALUES ($1, $2, $3, $4);"
+                  try {
+                    const result = await pool.query(queryString, [name, phone_number, email, adoptable_pet_id])
+                    if (last) {
+                      console.log("Seeding Complete 3")
+                      pool.end()
+                    }
+                    done()
+                  } catch (error) {
+                    console.log(`Inside Surrender Applications seeder block: ${error}`)
+                    pool.end()
+                    done()
+                  }
+                })
               }
               done()
             } catch (error) {
-              console.log(`Inside Error: ${error}`)
+              console.log(`Outside Error: ${error}`)
               pool.end()
               done()
             }
           })
         }
-        done()
+      done()
       } catch (error) {
-        console.log(`Outside Error: ${error}`)
-        done()
+      console.log(`Outside Error: ${error}`)
+      pool.end()
+      done()
       }
     })
   }
