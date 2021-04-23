@@ -13,7 +13,7 @@ const App = props => {
   }, [])
 
   return (
-    <div className="callout primary">
+    <div>
       <BrowserRouter>
         <Route path="/" component={NavBar} />
       </BrowserRouter>

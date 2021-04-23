@@ -1,15 +1,30 @@
-
 body {
-  padding: 1em;
+  font-family: Arial, Helvetica, sans-serif
 }
 
+.home{
+    text-align: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+.navbar-wrapper{
+background-color: royalblue;
+margin: auto;
+color: white;
+}
+
+.container {
+  padding: 1em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 .pet-container {
   display:flex;
   text-align: center;
 }
 
 .pet-tile {
-  width: 50%;
+  padding: 1em;
+  margin: auto;
 }
 
 .pet-detail {
@@ -18,7 +33,7 @@ body {
 
 .pet-pic {
   padding: .5em;
-  width: 33%;
+  width: 75%;
   margin: auto;
 }
 
@@ -29,24 +44,20 @@ body {
 .navbar {
   background-color: #b0d5ff;
   margin-bottom: 10px;
+  color: white
 }
 
-.solid-border-bottom{
-  border-bottom: 0.25rem solid gray;
-}
 .links {
   padding-left: 10px;
   padding-right: 10px;
 }
 
-img {
-  width: 20rem;
-}
-
 .pet-type-tile {
   margin-bottom: 3rem;
+  padding: 3em;
 }
 
 .adoption-form {
   width:50%;
+  margin: auto
 }

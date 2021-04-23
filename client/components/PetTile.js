@@ -12,7 +12,7 @@ const PetTile = (props) => {
   }
 
   return (
-    <div className="pet-tile">
+    <div className="pet-tile cell small-6">
       <div className="pet-pic">
         <Link to={`/pets/${type}/${id}`}>
           <img src={imgUrl} alt={`Picture of pet named ${name}`} />
