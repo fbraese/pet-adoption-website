@@ -31,7 +31,7 @@ class Pet {
       throw error
     }
   }
-  
+
   static async findByTypeAndId(type, id) {
     try {
       const queryString = "SELECT adoptable_pets.id, adoptable_pets.name, adoptable_pets.age, adoptable_pets.vaccination_status, adoptable_pets.adoption_story, adoptable_pets.available_for_adoption, adoptable_pets.pet_type_id, pet_types.type, adoptable_pets.img_url FROM adoptable_pets JOIN pet_types ON pet_types.id = adoptable_pets.pet_type_id WHERE pet_types.type = $1 AND adoptable_pets.id = $2;"
@@ -39,6 +39,18 @@ class Pet {
       const petData = result.rows[0]
       const pet = new this(petData)
       return pet
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
+  }
+
+  async save() {
+    try {
+      const queryString = "INSERT INTO adoptable_pets (name, age, vaccination_status, adoption_story, available_for_adoption, pet_type_id, img_url) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id;"
+      const result = await pool.query(queryString, [this.name, this.age, this.vaccinationStatus, this.adoptionStory, this.availableForAdoption, this.petTypeId, this.imgUrl])
+      this.id = result.rows[0].id
+      return this.id
     } catch (error) {
       console.error(error)
       throw error
