@@ -5,6 +5,7 @@ import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom"
 import PetTypesList from "./PetTypesList"
 import PetsByType from "./PetsByType.js"
 import PetDetailShow from "./PetDetailShow.js"
+import SurrenderForm from "./SurrenderForm.js"
 
 const NavBar = (props) => {
 
@@ -25,6 +26,7 @@ const NavBar = (props) => {
         <Route exact path="/pets" component={PetTypesList} />
         <Route exact path="/pets/:type" component={PetsByType} />
         <Route exact path="/pets/:type/:id" component={PetDetailShow} />
+        <Route exact path="/adoptions/new" component={SurrenderForm} />
       </Switch>
       </div>
     </div>
